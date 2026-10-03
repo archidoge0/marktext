@@ -1,0 +1,21 @@
+name: "ghav human: Test"
+"on":
+  push:
+    branches:
+      - ghav/dev/5448
+    paths:
+      - .ghav/human
+jobs:
+  test:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: ./.github/actions/setup
+      - name: Run Unit Tests
+        run: pnpm test
